@@ -2,8 +2,8 @@ define_helpers()
 {
   Time12a="\$(date +%H:%M)"
   PathShort="\w";
-  PathGitRoot="$(git rev-parse --show-toplevel)"
-  PathGitRepo="\$(pwd | cut -c \${#PathGitRoot}- | cut -c 2-)"
+  PathGitRoot="\$(git rev-parse --show-toplevel)"
+  PathGitRepo="\$(git rev-parse --show-prefix)"
 }
 
 override_git_prompt_colors() {
@@ -15,7 +15,7 @@ override_git_prompt_colors() {
 
   GIT_PROMPT_COMMAND_FAIL="${Red}✘[_LAST_COMMAND_STATE_]";
 
-  if [[ -z ${GIT_PROMPT_START_USER} ]]; then GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${Yellow}${PathGitRoot}${BrightYellow}${PathGitRepo}${ResetColor}"; fi
+  if [[ -z ${GIT_PROMPT_START_USER} ]]; then GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${Yellow}${PathGitRoot}${BrightYellow}/${PathGitRepo}${ResetColor}"; fi
 }
 
 reload_git_prompt_colors "Mleko"
